@@ -1,0 +1,31 @@
+{
+    "modelo": "RandomForestClassifier",
+    "classes": [
+        "alegre",
+        "neutro",
+        "triste",
+        "irritado"
+    ],
+    "sample_rate": 16000,
+    "quantidade_amostras": 220,
+    "quantidade_treinamento": 165,
+    "quantidade_teste": 55,
+    "quantidade_features": 38,
+    "acuracia": 0.509090909090909,
+    "features": [
+        "MFCC_mean_13",
+        "MFCC_std_13",
+        "RMS_mean",
+        "RMS_std",
+        "ZCR_mean",
+        "ZCR_std",
+        "SpectralCentroid_mean",
+        "SpectralCentroid_std",
+        "SpectralBandwidth_mean",
+        "SpectralBandwidth_std",
+        "SpectralRolloff_mean",
+        "SpectralRolloff_std",
+        "Pitch_mean",
+        "Pitch_std"
+    ]
+}

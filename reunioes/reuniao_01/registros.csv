@@ -1,0 +1,10 @@
+inicio,fim,pessoa,conf_pessoa,emocao,conf_emocao,arquivo
+0.0,3.62,caio,0.54,irritado,0.3302,testes\caio\WhatsApp Ptt 2026-09-15 at 09.53.52.wav
+3.62,6.96,caio,0.9267,triste,0.5628,testes\caio\WhatsApp Ptt 2026-09-15 at 09.53.56.wav
+6.96,10.12,caio,0.76,neutro,0.375,testes\caio\WhatsApp Ptt 2026-09-15 at 09.54.01.wav
+10.12,13.13,lorenzo,0.8333,irritado,0.3278,testes\lorenzo\WhatsApp Audio 2026-09-15 at 10.39.59.wav
+13.13,16.69,lorenzo,0.9,neutro,0.3283,testes\lorenzo\WhatsApp Audio 2026-09-15 at 10.40.00 (1).wav
+16.69,20.16,lorenzo,0.9867,neutro,0.3031,testes\lorenzo\WhatsApp Audio 2026-09-15 at 10.40.00.wav
+20.16,23.69,lucascas,0.4667,triste,0.4369,testes\lucascas\WhatsApp Ptt 2026-09-17 at 14.19.04.wav
+23.69,26.79,lucascas,0.48,neutro,0.3547,testes\lucascas\WhatsApp Ptt 2026-09-17 at 14.19.25.wav
+26.79,30.38,caio,0.46,triste,0.4975,testes\lucascas\WhatsApp Ptt 2026-09-17 at 14.19.33.wav

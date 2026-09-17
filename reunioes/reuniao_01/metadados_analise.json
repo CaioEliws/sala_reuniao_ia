@@ -1,0 +1,13 @@
+{
+    "tipo_analise": "segmentos_de_audio_gravados",
+    "total_arquivos_encontrados": 9,
+    "total_arquivos_processados": 9,
+    "duracao_total_segundos": 30.38,
+    "confianca_media_pessoa": 0.7059,
+    "confianca_media_emocao": 0.3907,
+    "total_baixa_confianca_pessoa": 4,
+    "total_baixa_confianca_emocao": 9,
+    "limite_baixa_confianca": 0.7,
+    "modelo_pessoas": "C:\\Users\\caioe\\Desktop\\sala_reuniao_ia\\modelos\\modelo_pessoas.pkl",
+    "modelo_emocoes": "C:\\Users\\caioe\\Desktop\\sala_reuniao_ia\\modelos\\modelo_emocoes.pkl"
+}

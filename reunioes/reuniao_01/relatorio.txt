@@ -1,0 +1,153 @@
+======================================================================
+RELATÓRIO DE ANÁLISE DE ÁUDIOS
+======================================================================
+
+Tipo de análise: segmentos de áudio gravados
+Data de geração: 17/09/2026 14:52:04
+
+----------------------------------------------------------------------
+1. RESUMO GERAL
+----------------------------------------------------------------------
+Total de segmentos analisados: 9
+Duração total dos segmentos: 00:00:30
+Participantes identificados: 3
+Emoções identificadas: 3
+
+----------------------------------------------------------------------
+2. PARTICIPANTES
+----------------------------------------------------------------------
+
+Pessoa: caio
+  Segmentos: 4
+  Tempo de fala: 00:00:14
+  Percentual do tempo: 45.13%
+
+Pessoa: lorenzo
+  Segmentos: 3
+  Tempo de fala: 00:00:10
+  Percentual do tempo: 33.05%
+
+Pessoa: lucascas
+  Segmentos: 2
+  Tempo de fala: 00:00:07
+  Percentual do tempo: 21.82%
+
+----------------------------------------------------------------------
+3. DISTRIBUIÇÃO DAS EMOÇÕES
+----------------------------------------------------------------------
+
+Emoção: neutro
+  Segmentos: 4
+  Percentual: 44.44%
+  Tempo total: 00:00:13
+
+Emoção: triste
+  Segmentos: 3
+  Percentual: 33.33%
+  Tempo total: 00:00:10
+
+Emoção: irritado
+  Segmentos: 2
+  Percentual: 22.22%
+  Tempo total: 00:00:07
+
+----------------------------------------------------------------------
+4. EMOÇÕES POR PARTICIPANTE
+----------------------------------------------------------------------
+
+caio:
+  irritado: 1 segmento(s)
+  neutro: 1 segmento(s)
+  triste: 2 segmento(s)
+
+lorenzo:
+  irritado: 1 segmento(s)
+  neutro: 2 segmento(s)
+  triste: 0 segmento(s)
+
+lucascas:
+  irritado: 0 segmento(s)
+  neutro: 1 segmento(s)
+  triste: 1 segmento(s)
+
+----------------------------------------------------------------------
+5. CONFIANÇA DAS CLASSIFICAÇÕES
+----------------------------------------------------------------------
+Confiança média - pessoa: 70.59%
+Confiança média - emoção: 39.07%
+Limite considerado baixa confiança: 70%
+
+----------------------------------------------------------------------
+6. SEGMENTOS COM BAIXA CONFIANÇA
+----------------------------------------------------------------------
+Total: 9
+
+Arquivo: testes\caio\WhatsApp Ptt 2026-09-15 at 09.53.52.wav
+  Pessoa: caio
+  Confiança pessoa: 54.00%
+  Emoção: irritado
+  Confiança emoção: 33.02%
+
+Arquivo: testes\caio\WhatsApp Ptt 2026-09-15 at 09.53.56.wav
+  Pessoa: caio
+  Confiança pessoa: 92.67%
+  Emoção: triste
+  Confiança emoção: 56.28%
+
+Arquivo: testes\caio\WhatsApp Ptt 2026-09-15 at 09.54.01.wav
+  Pessoa: caio
+  Confiança pessoa: 76.00%
+  Emoção: neutro
+  Confiança emoção: 37.50%
+
+Arquivo: testes\lorenzo\WhatsApp Audio 2026-09-15 at 10.39.59.wav
+  Pessoa: lorenzo
+  Confiança pessoa: 83.33%
+  Emoção: irritado
+  Confiança emoção: 32.78%
+
+Arquivo: testes\lorenzo\WhatsApp Audio 2026-09-15 at 10.40.00 (1).wav
+  Pessoa: lorenzo
+  Confiança pessoa: 90.00%
+  Emoção: neutro
+  Confiança emoção: 32.83%
+
+Arquivo: testes\lorenzo\WhatsApp Audio 2026-09-15 at 10.40.00.wav
+  Pessoa: lorenzo
+  Confiança pessoa: 98.67%
+  Emoção: neutro
+  Confiança emoção: 30.31%
+
+Arquivo: testes\lucascas\WhatsApp Ptt 2026-09-17 at 14.19.04.wav
+  Pessoa: lucascas
+  Confiança pessoa: 46.67%
+  Emoção: triste
+  Confiança emoção: 43.69%
+
+Arquivo: testes\lucascas\WhatsApp Ptt 2026-09-17 at 14.19.25.wav
+  Pessoa: lucascas
+  Confiança pessoa: 48.00%
+  Emoção: neutro
+  Confiança emoção: 35.47%
+
+Arquivo: testes\lucascas\WhatsApp Ptt 2026-09-17 at 14.19.33.wav
+  Pessoa: caio
+  Confiança pessoa: 46.00%
+  Emoção: triste
+  Confiança emoção: 49.75%
+
+----------------------------------------------------------------------
+7. ARQUIVOS GERADOS
+----------------------------------------------------------------------
+CSV: registros.csv
+Relatório: relatorio.txt
+Gráficos:
+  - tempo_fala_por_participante.png
+  - distribuicao_emocoes.png
+  - emocoes_por_participante.png
+  - percentual_emocoes.png
+  - confianca_media.png
+
+======================================================================
+FIM DO RELATÓRIO
+======================================================================
