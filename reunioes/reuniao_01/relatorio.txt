@@ -3,52 +3,62 @@ RELATÓRIO DE ANÁLISE DE ÁUDIOS
 ======================================================================
 
 Tipo de análise: segmentos de áudio gravados
-Data de geração: 17/09/2026 14:52:04
+Data de geração: 22/09/2026 09:35:42
 
 ----------------------------------------------------------------------
 1. RESUMO GERAL
 ----------------------------------------------------------------------
-Total de segmentos analisados: 9
-Duração total dos segmentos: 00:00:30
-Participantes identificados: 3
-Emoções identificadas: 3
+Total de segmentos analisados: 15
+Duração total dos segmentos: 00:00:51
+Participantes identificados: 4
+Emoções identificadas: 4
 
 ----------------------------------------------------------------------
 2. PARTICIPANTES
 ----------------------------------------------------------------------
 
-Pessoa: caio
-  Segmentos: 4
-  Tempo de fala: 00:00:14
-  Percentual do tempo: 45.13%
+Pessoa: nicolas
+  Segmentos: 5
+  Tempo de fala: 00:00:18
+  Percentual do tempo: 34.68%
 
 Pessoa: lorenzo
+  Segmentos: 5
+  Tempo de fala: 00:00:16
+  Percentual do tempo: 32.21%
+
+Pessoa: caio
   Segmentos: 3
   Tempo de fala: 00:00:10
-  Percentual do tempo: 33.05%
+  Percentual do tempo: 20.01%
 
 Pessoa: lucascas
   Segmentos: 2
   Tempo de fala: 00:00:07
-  Percentual do tempo: 21.82%
+  Percentual do tempo: 13.11%
 
 ----------------------------------------------------------------------
 3. DISTRIBUIÇÃO DAS EMOÇÕES
 ----------------------------------------------------------------------
 
-Emoção: neutro
-  Segmentos: 4
-  Percentual: 44.44%
-  Tempo total: 00:00:13
-
 Emoção: triste
-  Segmentos: 3
+  Segmentos: 5
   Percentual: 33.33%
+  Tempo total: 00:00:17
+
+Emoção: alegre
+  Segmentos: 5
+  Percentual: 33.33%
+  Tempo total: 00:00:17
+
+Emoção: neutro
+  Segmentos: 3
+  Percentual: 20.00%
   Tempo total: 00:00:10
 
 Emoção: irritado
   Segmentos: 2
-  Percentual: 22.22%
+  Percentual: 13.33%
   Tempo total: 00:00:07
 
 ----------------------------------------------------------------------
@@ -56,85 +66,130 @@ Emoção: irritado
 ----------------------------------------------------------------------
 
 caio:
-  irritado: 1 segmento(s)
+  alegre: 0 segmento(s)
+  irritado: 0 segmento(s)
   neutro: 1 segmento(s)
   triste: 2 segmento(s)
 
 lorenzo:
+  alegre: 3 segmento(s)
   irritado: 1 segmento(s)
-  neutro: 2 segmento(s)
-  triste: 0 segmento(s)
+  neutro: 0 segmento(s)
+  triste: 1 segmento(s)
 
 lucascas:
+  alegre: 0 segmento(s)
   irritado: 0 segmento(s)
+  neutro: 1 segmento(s)
+  triste: 1 segmento(s)
+
+nicolas:
+  alegre: 2 segmento(s)
+  irritado: 1 segmento(s)
   neutro: 1 segmento(s)
   triste: 1 segmento(s)
 
 ----------------------------------------------------------------------
 5. CONFIANÇA DAS CLASSIFICAÇÕES
 ----------------------------------------------------------------------
-Confiança média - pessoa: 70.59%
-Confiança média - emoção: 39.07%
+Confiança média - pessoa: 63.76%
+Confiança média - emoção: 39.08%
 Limite considerado baixa confiança: 70%
 
 ----------------------------------------------------------------------
 6. SEGMENTOS COM BAIXA CONFIANÇA
 ----------------------------------------------------------------------
-Total: 9
+Total: 15
 
 Arquivo: testes\caio\WhatsApp Ptt 2026-09-15 at 09.53.52.wav
   Pessoa: caio
-  Confiança pessoa: 54.00%
-  Emoção: irritado
-  Confiança emoção: 33.02%
+  Confiança pessoa: 50.00%
+  Emoção: neutro
+  Confiança emoção: 28.99%
 
 Arquivo: testes\caio\WhatsApp Ptt 2026-09-15 at 09.53.56.wav
   Pessoa: caio
-  Confiança pessoa: 92.67%
+  Confiança pessoa: 94.67%
   Emoção: triste
-  Confiança emoção: 56.28%
+  Confiança emoção: 48.00%
 
 Arquivo: testes\caio\WhatsApp Ptt 2026-09-15 at 09.54.01.wav
   Pessoa: caio
-  Confiança pessoa: 76.00%
+  Confiança pessoa: 72.67%
+  Emoção: triste
+  Confiança emoção: 35.33%
+
+Arquivo: testes\kaique\WhatsApp Ptt 2026-09-17 at 14.53.33.wav
+  Pessoa: lorenzo
+  Confiança pessoa: 55.00%
+  Emoção: alegre
+  Confiança emoção: 33.00%
+
+Arquivo: testes\kaique\WhatsApp Ptt 2026-09-17 at 14.53.38.wav
+  Pessoa: lorenzo
+  Confiança pessoa: 52.33%
+  Emoção: alegre
+  Confiança emoção: 35.33%
+
+Arquivo: testes\kaique\WhatsApp Ptt 2026-09-17 at 14.53.43.wav
+  Pessoa: nicolas
+  Confiança pessoa: 30.67%
   Emoção: neutro
-  Confiança emoção: 37.50%
+  Confiança emoção: 34.36%
 
 Arquivo: testes\lorenzo\WhatsApp Audio 2026-09-15 at 10.39.59.wav
   Pessoa: lorenzo
-  Confiança pessoa: 83.33%
+  Confiança pessoa: 82.33%
   Emoção: irritado
-  Confiança emoção: 32.78%
+  Confiança emoção: 34.08%
 
 Arquivo: testes\lorenzo\WhatsApp Audio 2026-09-15 at 10.40.00 (1).wav
   Pessoa: lorenzo
-  Confiança pessoa: 90.00%
-  Emoção: neutro
-  Confiança emoção: 32.83%
+  Confiança pessoa: 92.00%
+  Emoção: alegre
+  Confiança emoção: 34.67%
 
 Arquivo: testes\lorenzo\WhatsApp Audio 2026-09-15 at 10.40.00.wav
   Pessoa: lorenzo
-  Confiança pessoa: 98.67%
-  Emoção: neutro
-  Confiança emoção: 30.31%
+  Confiança pessoa: 97.67%
+  Emoção: triste
+  Confiança emoção: 28.67%
 
 Arquivo: testes\lucascas\WhatsApp Ptt 2026-09-17 at 14.19.04.wav
   Pessoa: lucascas
-  Confiança pessoa: 46.67%
+  Confiança pessoa: 40.33%
   Emoção: triste
-  Confiança emoção: 43.69%
+  Confiança emoção: 45.00%
 
 Arquivo: testes\lucascas\WhatsApp Ptt 2026-09-17 at 14.19.25.wav
   Pessoa: lucascas
-  Confiança pessoa: 48.00%
+  Confiança pessoa: 54.33%
   Emoção: neutro
-  Confiança emoção: 35.47%
+  Confiança emoção: 31.67%
 
 Arquivo: testes\lucascas\WhatsApp Ptt 2026-09-17 at 14.19.33.wav
-  Pessoa: caio
-  Confiança pessoa: 46.00%
+  Pessoa: nicolas
+  Confiança pessoa: 38.00%
   Emoção: triste
-  Confiança emoção: 49.75%
+  Confiança emoção: 46.00%
+
+Arquivo: testes\nicolas\WhatsApp Ptt 2026-09-17 at 18.18.11 (1).wav
+  Pessoa: nicolas
+  Confiança pessoa: 79.33%
+  Emoção: alegre
+  Confiança emoção: 62.33%
+
+Arquivo: testes\nicolas\WhatsApp Ptt 2026-09-17 at 18.18.11 (2).wav
+  Pessoa: nicolas
+  Confiança pessoa: 78.67%
+  Emoção: alegre
+  Confiança emoção: 35.00%
+
+Arquivo: testes\nicolas\WhatsApp Ptt 2026-09-17 at 18.18.11.wav
+  Pessoa: nicolas
+  Confiança pessoa: 38.33%
+  Emoção: irritado
+  Confiança emoção: 53.84%
 
 ----------------------------------------------------------------------
 7. ARQUIVOS GERADOS

@@ -4,14 +4,15 @@
         "caio",
         "kaique",
         "lorenzo",
-        "lucascas"
+        "lucascas",
+        "nicolas"
     ],
     "sample_rate": 16000,
-    "quantidade_amostras": 120,
-    "quantidade_treinamento": 90,
-    "quantidade_teste": 30,
+    "quantidade_amostras": 144,
+    "quantidade_treinamento": 108,
+    "quantidade_teste": 36,
     "quantidade_features": 38,
-    "acuracia": 1.0,
+    "acuracia": 0.9722222222222222,
     "features": [
         "MFCC_mean_13",
         "MFCC_std_13",

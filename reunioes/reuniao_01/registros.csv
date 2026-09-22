@@ -1,10 +1,16 @@
 inicio,fim,pessoa,conf_pessoa,emocao,conf_emocao,arquivo
-0.0,3.62,caio,0.54,irritado,0.3302,testes\caio\WhatsApp Ptt 2026-09-15 at 09.53.52.wav
-3.62,6.96,caio,0.9267,triste,0.5628,testes\caio\WhatsApp Ptt 2026-09-15 at 09.53.56.wav
-6.96,10.12,caio,0.76,neutro,0.375,testes\caio\WhatsApp Ptt 2026-09-15 at 09.54.01.wav
-10.12,13.13,lorenzo,0.8333,irritado,0.3278,testes\lorenzo\WhatsApp Audio 2026-09-15 at 10.39.59.wav
-13.13,16.69,lorenzo,0.9,neutro,0.3283,testes\lorenzo\WhatsApp Audio 2026-09-15 at 10.40.00 (1).wav
-16.69,20.16,lorenzo,0.9867,neutro,0.3031,testes\lorenzo\WhatsApp Audio 2026-09-15 at 10.40.00.wav
-20.16,23.69,lucascas,0.4667,triste,0.4369,testes\lucascas\WhatsApp Ptt 2026-09-17 at 14.19.04.wav
-23.69,26.79,lucascas,0.48,neutro,0.3547,testes\lucascas\WhatsApp Ptt 2026-09-17 at 14.19.25.wav
-26.79,30.38,caio,0.46,triste,0.4975,testes\lucascas\WhatsApp Ptt 2026-09-17 at 14.19.33.wav
+0.0,3.62,caio,0.5,neutro,0.2899,testes\caio\WhatsApp Ptt 2026-09-15 at 09.53.52.wav
+3.62,6.96,caio,0.9467,triste,0.48,testes\caio\WhatsApp Ptt 2026-09-15 at 09.53.56.wav
+6.96,10.12,caio,0.7267,triste,0.3533,testes\caio\WhatsApp Ptt 2026-09-15 at 09.54.01.wav
+10.12,13.27,lorenzo,0.55,alegre,0.33,testes\kaique\WhatsApp Ptt 2026-09-17 at 14.53.33.wav
+13.27,16.37,lorenzo,0.5233,alegre,0.3533,testes\kaique\WhatsApp Ptt 2026-09-17 at 14.53.38.wav
+16.37,19.2,nicolas,0.3067,neutro,0.3436,testes\kaique\WhatsApp Ptt 2026-09-17 at 14.53.43.wav
+19.2,22.21,lorenzo,0.8233,irritado,0.3408,testes\lorenzo\WhatsApp Audio 2026-09-15 at 10.39.59.wav
+22.21,25.77,lorenzo,0.92,alegre,0.3467,testes\lorenzo\WhatsApp Audio 2026-09-15 at 10.40.00 (1).wav
+25.77,29.24,lorenzo,0.9767,triste,0.2867,testes\lorenzo\WhatsApp Audio 2026-09-15 at 10.40.00.wav
+29.24,32.77,lucascas,0.4033,triste,0.45,testes\lucascas\WhatsApp Ptt 2026-09-17 at 14.19.04.wav
+32.77,35.87,lucascas,0.5433,neutro,0.3167,testes\lucascas\WhatsApp Ptt 2026-09-17 at 14.19.25.wav
+35.87,39.46,nicolas,0.38,triste,0.46,testes\lucascas\WhatsApp Ptt 2026-09-17 at 14.19.33.wav
+39.46,43.54,nicolas,0.7933,alegre,0.6233,testes\nicolas\WhatsApp Ptt 2026-09-17 at 18.18.11 (1).wav
+43.54,46.93,nicolas,0.7867,alegre,0.35,testes\nicolas\WhatsApp Ptt 2026-09-17 at 18.18.11 (2).wav
+46.93,50.58,nicolas,0.3833,irritado,0.5384,testes\nicolas\WhatsApp Ptt 2026-09-17 at 18.18.11.wav

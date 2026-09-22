@@ -7,11 +7,11 @@
         "irritado"
     ],
     "sample_rate": 16000,
-    "quantidade_amostras": 220,
-    "quantidade_treinamento": 165,
-    "quantidade_teste": 55,
+    "quantidade_amostras": 252,
+    "quantidade_treinamento": 189,
+    "quantidade_teste": 63,
     "quantidade_features": 38,
-    "acuracia": 0.509090909090909,
+    "acuracia": 0.5079365079365079,
     "features": [
         "MFCC_mean_13",
         "MFCC_std_13",
