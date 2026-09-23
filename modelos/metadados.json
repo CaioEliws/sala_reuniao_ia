@@ -1,0 +1,35 @@
+{
+    "pessoas": {
+        "modelo": "RandomForestClassifier",
+        "classes": [
+            "caio",
+            "kaique",
+            "lorenzo",
+            "lucascas",
+            "nicolas"
+        ],
+        "sample_rate": 16000,
+        "quantidade_amostras": 144,
+        "quantidade_treinamento": 108,
+        "quantidade_teste": 36,
+        "quantidade_features": 76,
+        "acuracia": 0.9722222222222222,
+        "arvores": 300
+    },
+    "emocoes": {
+        "modelo": "RandomForestClassifier",
+        "classes": [
+            "alegre",
+            "irritado",
+            "neutro",
+            "triste"
+        ],
+        "sample_rate": 16000,
+        "quantidade_amostras": 252,
+        "quantidade_treinamento": 189,
+        "quantidade_teste": 63,
+        "quantidade_features": 80,
+        "acuracia": 0.4603174603174603,
+        "arvores": 300
+    }
+}

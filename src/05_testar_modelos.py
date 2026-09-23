@@ -1,245 +1,453 @@
+import argparse
+from collections import Counter
 from pathlib import Path
 
-import joblib
-import librosa
-import numpy as np
+import comum
 
 
 # ============================================================
-# CONFIGURAÇÕES
+# EXIBIR RESULTADO
 # ============================================================
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+def mostrar_resultado(resultado):
 
-MODELOS_DIR = BASE_DIR / "modelos"
+    print()
 
-TESTES_DIR = (
-    BASE_DIR
-    / "reunioes"
-    / "reuniao_01"
-    / "testes"
-)
+    if resultado["silencio"]:
 
-MODELO_PESSOAS = MODELOS_DIR / "modelo_pessoas.pkl"
-MODELO_EMOCOES = MODELOS_DIR / "modelo_emocoes.pkl"
+        print(
+            "  Áudio silencioso: "
+            "nada para classificar."
+        )
 
+        return
 
-# ============================================================
-# EXTRAÇÃO DE FEATURES
-# ============================================================
-
-def extrair_features(caminho_audio):
-
-    y, sr = librosa.load(
-        caminho_audio,
-        sr=16000,
-        mono=True
+    print(
+        f"  Pessoa : "
+        f"{resultado['pessoa']:<14} "
+        f"confiança "
+        f"{resultado['conf_pessoa']:.0%}"
     )
 
-    # --------------------------------------------------------
-    # MFCC
-    # --------------------------------------------------------
-
-    mfcc = librosa.feature.mfcc(
-        y=y,
-        sr=sr,
-        n_mfcc=13
+    print(
+        f"  Top-3  : "
+        f"{comum.formatar_ranking(resultado['ranking_pessoa'])}"
     )
 
-    mfcc_mean = np.mean(mfcc, axis=1)
-    mfcc_std = np.std(mfcc, axis=1)
-
-    # --------------------------------------------------------
-    # RMS
-    # --------------------------------------------------------
-
-    rms = librosa.feature.rms(y=y)[0]
-
-    rms_mean = np.mean(rms)
-    rms_std = np.std(rms)
-
-    # --------------------------------------------------------
-    # ZCR
-    # --------------------------------------------------------
-
-    zcr = librosa.feature.zero_crossing_rate(y)[0]
-
-    zcr_mean = np.mean(zcr)
-    zcr_std = np.std(zcr)
-
-    # --------------------------------------------------------
-    # Spectral Centroid
-    # --------------------------------------------------------
-
-    spectral_centroid = librosa.feature.spectral_centroid(
-        y=y,
-        sr=sr
-    )[0]
-
-    spectral_centroid_mean = np.mean(spectral_centroid)
-    spectral_centroid_std = np.std(spectral_centroid)
-
-    # --------------------------------------------------------
-    # Spectral Bandwidth
-    # --------------------------------------------------------
-
-    spectral_bandwidth = librosa.feature.spectral_bandwidth(
-        y=y,
-        sr=sr
-    )[0]
-
-    spectral_bandwidth_mean = np.mean(spectral_bandwidth)
-    spectral_bandwidth_std = np.std(spectral_bandwidth)
-
-    # --------------------------------------------------------
-    # Spectral Rolloff
-    # --------------------------------------------------------
-
-    spectral_rolloff = librosa.feature.spectral_rolloff(
-        y=y,
-        sr=sr
-    )[0]
-
-    spectral_rolloff_mean = np.mean(spectral_rolloff)
-    spectral_rolloff_std = np.std(spectral_rolloff)
-
-    # --------------------------------------------------------
-    # Pitch
-    # --------------------------------------------------------
-
-    f0 = librosa.yin(
-        y,
-        fmin=librosa.note_to_hz("C2"),
-        fmax=librosa.note_to_hz("C7")
+    print(
+        f"  Margem : "
+        f"{resultado['margem_pessoa']:.0%}"
     )
 
-    f0_valid = f0[np.isfinite(f0)]
+    print()
 
-    if len(f0_valid) > 0:
+    print(
+        f"  Emoção : "
+        f"{resultado['emocao']:<14} "
+        f"confiança "
+        f"{resultado['conf_emocao']:.0%}"
+    )
 
-        pitch_mean = np.mean(f0_valid)
-        pitch_std = np.std(f0_valid)
+    print(
+        f"  Top-3  : "
+        f"{comum.formatar_ranking(resultado['ranking_emocao'])}"
+    )
 
-    else:
-
-        pitch_mean = 0.0
-        pitch_std = 0.0
-
-    # --------------------------------------------------------
-    # Vetor final
-    # --------------------------------------------------------
-
-    features = np.concatenate([
-        mfcc_mean,
-        mfcc_std,
-
-        [rms_mean],
-        [rms_std],
-
-        [zcr_mean],
-        [zcr_std],
-
-        [spectral_centroid_mean],
-        [spectral_centroid_std],
-
-        [spectral_bandwidth_mean],
-        [spectral_bandwidth_std],
-
-        [spectral_rolloff_mean],
-        [spectral_rolloff_std],
-
-        [pitch_mean],
-        [pitch_std],
-    ])
-
-    return features
-
-
-# ============================================================
-# CARREGAR MODELOS
-# ============================================================
-
-def carregar_modelos():
-
-    if not MODELO_PESSOAS.exists():
+    if (
+        resultado["pessoa"]
+        == comum.ROTULO_DESCONHECIDO
+    ):
 
         print()
-        print("ERRO: modelo de pessoas não encontrado.")
-        print(f"Esperado: {MODELO_PESSOAS}")
-        return None, None
 
-    if not MODELO_EMOCOES.exists():
+        print(
+            "  Pessoa não reconhecida:"
+        )
+
+        print(
+            f"    confiança mínima: "
+            f"{comum.LIMIAR_PESSOA:.0%}"
+        )
+
+        print(
+            f"    margem mínima: "
+            f"{comum.MARGEM_PESSOA:.0%}"
+        )
+
+    if (
+        resultado["emocao"]
+        == comum.ROTULO_INCERTO
+    ):
 
         print()
-        print("ERRO: modelo de emoções não encontrado.")
-        print(f"Esperado: {MODELO_EMOCOES}")
-        return None, None
 
-    pacote_pessoas = joblib.load(MODELO_PESSOAS)
-    pacote_emocoes = joblib.load(MODELO_EMOCOES)
+        print(
+            "  Emoção incerta:"
+        )
 
-    modelo_pessoas = pacote_pessoas["modelo"]
-    modelo_emocoes = pacote_emocoes["modelo"]
-
-    return modelo_pessoas, modelo_emocoes
+        print(
+            f"    confiança mínima: "
+            f"{comum.LIMIAR_EMOCAO:.0%}"
+        )
 
 
 # ============================================================
-# TESTAR UM ÁUDIO
+# TESTAR UM ARQUIVO
 # ============================================================
 
-def testar_audio(
-    caminho_audio,
+def testar_arquivo(
+    caminho,
     modelo_pessoas,
     modelo_emocoes
 ):
 
+    caminho = Path(caminho)
+
+    if not caminho.exists():
+
+        print(
+            f"ERRO: arquivo não encontrado:"
+        )
+
+        print(
+            caminho
+        )
+
+        return
+
+    print()
+    print("=" * 70)
+    print("TESTE DE UM ÁUDIO")
+    print("=" * 70)
+
+    print()
+    print(
+        f"Arquivo: {caminho}"
+    )
+
     try:
 
-        features = extrair_features(caminho_audio)
-
-        features = features.reshape(1, -1)
-
-        # ----------------------------------------------------
-        # Pessoa
-        # ----------------------------------------------------
-
-        pessoa = modelo_pessoas.predict(features)[0]
-
-        probabilidades_pessoa = (
-            modelo_pessoas.predict_proba(features)[0]
+        audio = comum.carregar_wav(
+            caminho
         )
 
-        confianca_pessoa = float(
-            np.max(probabilidades_pessoa)
+        resultado = comum.classificar_audio(
+            audio,
+            modelo_pessoas,
+            modelo_emocoes
         )
 
-        # ----------------------------------------------------
-        # Emoção
-        # ----------------------------------------------------
-
-        emocao = modelo_emocoes.predict(features)[0]
-
-        probabilidades_emocao = (
-            modelo_emocoes.predict_proba(features)[0]
+        mostrar_resultado(
+            resultado
         )
-
-        confianca_emocao = float(
-            np.max(probabilidades_emocao)
-        )
-
-        return {
-            "pessoa": pessoa,
-            "confianca_pessoa": confianca_pessoa,
-            "emocao": emocao,
-            "confianca_emocao": confianca_emocao
-        }
 
     except Exception as erro:
 
-        return {
-            "erro": str(erro)
-        }
+        print()
+        print(
+            f"ERRO ao processar áudio:"
+        )
+
+        print(
+            erro
+        )
+
+
+# ============================================================
+# TESTAR PASTA
+# ============================================================
+
+def testar_pasta(
+    pasta,
+    modelo_pessoas,
+    modelo_emocoes,
+    metadados
+):
+
+    pasta = Path(pasta)
+
+    if not pasta.exists():
+
+        print()
+        print(
+            f"ERRO: pasta não encontrada:"
+        )
+
+        print(
+            pasta
+        )
+
+        return
+
+    classes_pessoas = set(
+        metadados
+        .get("pessoas", {})
+        .get("classes", [])
+    )
+
+    classes_emocoes = set(
+        metadados
+        .get("emocoes", {})
+        .get("classes", [])
+    )
+
+    audios = sorted(
+        pasta.rglob("*.wav")
+    )
+
+    if not audios:
+
+        print()
+        print(
+            "Nenhum WAV encontrado."
+        )
+
+        return
+
+    print()
+    print("=" * 70)
+    print("TESTE EM LOTE")
+    print("=" * 70)
+
+    print()
+    print(
+        f"Pasta: {pasta}"
+    )
+
+    print(
+        f"Áudios encontrados: {len(audios)}"
+    )
+
+    print()
+
+    # --------------------------------------------------------
+    # CONTADORES
+    # --------------------------------------------------------
+
+    acertos_pessoa = 0
+    total_pessoa = 0
+
+    estatisticas_pessoas = {}
+
+    # --------------------------------------------------------
+    # PROCESSAMENTO
+    # --------------------------------------------------------
+
+    for indice, arquivo in enumerate(
+        audios,
+        start=1
+    ):
+
+        esperado = arquivo.parent.name
+
+        print(
+            "-" * 70
+        )
+
+        print(
+            f"[{indice}/{len(audios)}] "
+            f"{arquivo.name}"
+        )
+
+        try:
+
+            audio = comum.carregar_wav(
+                arquivo
+            )
+
+            resultado = comum.classificar_audio(
+                audio,
+                modelo_pessoas,
+                modelo_emocoes
+            )
+
+        except Exception as erro:
+
+            print(
+                f"ERRO: {erro}"
+            )
+
+            continue
+
+        if resultado["silencio"]:
+
+            print(
+                "  SILÊNCIO"
+            )
+
+            continue
+
+        pessoa_prevista = (
+            resultado["pessoa"]
+        )
+
+        emocao_prevista = (
+            resultado["emocao"]
+        )
+
+        # ----------------------------------------------------
+        # PESSOA
+        # ----------------------------------------------------
+
+        pessoa_esperada = esperado
+
+        if esperado in classes_pessoas:
+
+            total_pessoa += 1
+
+            correto = (
+                pessoa_prevista.lower()
+                == pessoa_esperada.lower()
+            )
+
+            if correto:
+                acertos_pessoa += 1
+
+            if esperado not in estatisticas_pessoas:
+
+                estatisticas_pessoas[
+                    esperado
+                ] = {
+                    "total": 0,
+                    "acertos": 0
+                }
+
+            estatisticas_pessoas[
+                esperado
+            ]["total"] += 1
+
+            if correto:
+
+                estatisticas_pessoas[
+                    esperado
+                ]["acertos"] += 1
+
+        # ----------------------------------------------------
+        # STATUS
+        # ----------------------------------------------------
+
+        if esperado in classes_pessoas:
+
+            status = (
+                "OK"
+                if pessoa_prevista.lower()
+                == esperado.lower()
+                else "ERR"
+            )
+
+        else:
+
+            status = "INFO"
+
+        print(
+            f"  {status} "
+            f"Pessoa: "
+            f"{pessoa_prevista:<14} "
+            f"{resultado['conf_pessoa']:.0%}"
+        )
+
+        print(
+            f"     Esperado: "
+            f"{esperado}"
+        )
+
+        print(
+            f"  Emoção: "
+            f"{emocao_prevista:<14} "
+            f"{resultado['conf_emocao']:.0%}"
+        )
+
+        print(
+            f"  Top pessoa: "
+            f"{comum.formatar_ranking(
+                resultado['ranking_pessoa']
+            )}"
+        )
+
+        print(
+            f"  Top emoção: "
+            f"{comum.formatar_ranking(
+                resultado['ranking_emocao']
+            )}"
+        )
+
+    # ========================================================
+    # RESULTADO
+    # ========================================================
+
+    print()
+    print("=" * 70)
+    print("RESULTADO FINAL")
+    print("=" * 70)
+
+    print()
+
+    print(
+        f"Áudios encontrados : "
+        f"{len(audios)}"
+    )
+
+    print(
+        f"Testes de pessoa   : "
+        f"{total_pessoa}"
+    )
+
+    print(
+        f"Acertos            : "
+        f"{acertos_pessoa}"
+    )
+
+    if total_pessoa > 0:
+
+        taxa = (
+            acertos_pessoa
+            / total_pessoa
+        )
+
+        print(
+            f"Taxa de acerto     : "
+            f"{taxa:.2%}"
+        )
+
+    # ========================================================
+    # POR PESSOA
+    # ========================================================
+
+    if estatisticas_pessoas:
+
+        print()
+        print(
+            "=" * 70
+        )
+
+        print(
+            "RESULTADO POR PESSOA"
+        )
+
+        print(
+            "=" * 70
+        )
+
+        print()
+
+        for pessoa, dados in sorted(
+            estatisticas_pessoas.items()
+        ):
+
+            total = dados["total"]
+            acertos = dados["acertos"]
+
+            taxa = (
+                acertos / total
+                if total > 0
+                else 0
+            )
+
+            print(
+                f"{pessoa:<15} "
+                f"{acertos}/{total} "
+                f"({taxa:.2%})"
+            )
 
 
 # ============================================================
@@ -248,249 +456,151 @@ def testar_audio(
 
 def main():
 
-    print()
-    print("=" * 65)
-    print(" TESTE DOS MODELOS")
-    print("=" * 65)
-
-    # --------------------------------------------------------
-    # Verificar pasta
-    # --------------------------------------------------------
-
-    if not TESTES_DIR.exists():
-
-        print()
-        print("ERRO: pasta de testes não encontrada.")
-        print(f"Esperado: {TESTES_DIR}")
-        return
-
-    # --------------------------------------------------------
-    # Carregar modelos
-    # --------------------------------------------------------
-
-    modelo_pessoas, modelo_emocoes = carregar_modelos()
-
-    if modelo_pessoas is None or modelo_emocoes is None:
-        return
-
-    # --------------------------------------------------------
-    # Mostrar pessoas conhecidas pelo modelo
-    # --------------------------------------------------------
-
-    pessoas_modelo = list(modelo_pessoas.classes_)
-
-    print()
-    print("Pessoas conhecidas pelo modelo:")
-
-    for pessoa in pessoas_modelo:
-
-        print(f"    - {pessoa}")
-
-    # --------------------------------------------------------
-    # Encontrar áudios
-    # --------------------------------------------------------
-
-    audios = sorted(
-        TESTES_DIR.rglob("*.wav")
+    parser = argparse.ArgumentParser(
+        description=(
+            "Testa os modelos de pessoas "
+            "e emoções."
+        )
     )
 
-    if not audios:
+    parser.add_argument(
+        "--arquivo",
+        help=(
+            "Classifica um único arquivo WAV."
+        )
+    )
+
+    parser.add_argument(
+        "--pasta",
+        help=(
+            "Classifica todos os WAVs "
+            "encontrados na pasta."
+        )
+    )
+
+    parser.add_argument(
+        "--listar-dispositivos",
+        action="store_true",
+        help=(
+            "Lista dispositivos de áudio."
+        )
+    )
+
+    args = parser.parse_args()
+
+    # --------------------------------------------------------
+    # DISPOSITIVOS
+    # --------------------------------------------------------
+
+    if args.listar_dispositivos:
+
+        comum.listar_dispositivos()
+
+        return
+
+    # --------------------------------------------------------
+    # CARREGAR MODELOS
+    # --------------------------------------------------------
+
+    try:
+
+        (
+            modelo_pessoas,
+            modelo_emocoes,
+            metadados
+        ) = comum.carregar_modelos()
+
+    except Exception as erro:
 
         print()
-        print("Nenhum arquivo WAV encontrado.")
+        print(
+            f"ERRO ao carregar modelos:"
+        )
+
+        print(
+            erro
+        )
+
         return
 
     print()
-    print(f"Áudios encontrados: {len(audios)}")
+    print("=" * 70)
+    print("MODELOS CARREGADOS")
+    print("=" * 70)
+
     print()
 
+    print(
+        "Pessoas:"
+    )
+
+    for classe in modelo_pessoas.classes_:
+
+        print(
+            f"   - {classe}"
+        )
+
+    print()
+
+    print(
+        "Emoções:"
+    )
+
+    for classe in modelo_emocoes.classes_:
+
+        print(
+            f"   - {classe}"
+        )
+
     # --------------------------------------------------------
-    # Contadores gerais
+    # ARQUIVO
     # --------------------------------------------------------
 
-    acertos = 0
-    erros = 0
-    processados = 0
+    if args.arquivo:
 
-    # --------------------------------------------------------
-    # Estatísticas por pessoa
-    # --------------------------------------------------------
-
-    estatisticas = {}
-
-    for pessoa in pessoas_modelo:
-
-        estatisticas[pessoa] = {
-            "total": 0,
-            "acertos": 0
-        }
-
-    # --------------------------------------------------------
-    # Testar cada áudio
-    # --------------------------------------------------------
-
-    for indice, audio in enumerate(audios, start=1):
-
-        esperado = audio.parent.name
-
-        resultado = testar_audio(
-            audio,
+        testar_arquivo(
+            args.arquivo,
             modelo_pessoas,
             modelo_emocoes
         )
 
-        # ----------------------------------------------------
-        # Erro
-        # ----------------------------------------------------
-
-        if "erro" in resultado:
-
-            print(
-                f"[{indice}/{len(audios)}] "
-                f"{audio.name}"
-            )
-
-            print(
-                f"    ERRO: {resultado['erro']}"
-            )
-
-            print()
-
-            continue
-
-        # ----------------------------------------------------
-        # Resultado
-        # ----------------------------------------------------
-
-        pessoa = resultado["pessoa"]
-        conf_pessoa = resultado["confianca_pessoa"]
-
-        emocao = resultado["emocao"]
-        conf_emocao = resultado["confianca_emocao"]
-
-        correto = (
-            esperado.lower()
-            == pessoa.lower()
-        )
-
-        # ----------------------------------------------------
-        # Estatísticas
-        # ----------------------------------------------------
-
-        processados += 1
-
-        if esperado not in estatisticas:
-
-            estatisticas[esperado] = {
-                "total": 0,
-                "acertos": 0
-            }
-
-        estatisticas[esperado]["total"] += 1
-
-        if correto:
-
-            status = "OK"
-
-            acertos += 1
-
-            estatisticas[esperado]["acertos"] += 1
-
-        else:
-
-            status = "ERRO"
-
-            erros += 1
-
-        # ----------------------------------------------------
-        # Mostrar resultado
-        # ----------------------------------------------------
-
-        print(
-            f"[{indice}/{len(audios)}] "
-            f"{audio.name}"
-        )
-
-        print(
-            f"    Pessoa : {pessoa:<10} "
-            f"{conf_pessoa * 100:6.2f}%   "
-            f"Esperado: {esperado:<10} "
-            f"[{status}]"
-        )
-
-        print(
-            f"    Emoção : {emocao:<10} "
-            f"{conf_emocao * 100:6.2f}%"
-        )
-
-        print()
-
-    # ========================================================
-    # RESULTADO FINAL
-    # ========================================================
-
-    if processados == 0:
-
-        print("Nenhum áudio foi processado.")
         return
 
-    taxa = (
-        acertos
-        / processados
-        * 100
+    # --------------------------------------------------------
+    # PASTA
+    # --------------------------------------------------------
+
+    if args.pasta:
+
+        testar_pasta(
+            args.pasta,
+            modelo_pessoas,
+            modelo_emocoes,
+            metadados
+        )
+
+        return
+
+    # --------------------------------------------------------
+    # SEM ARGUMENTO
+    # --------------------------------------------------------
+
+    print()
+    print(
+        "Nenhum arquivo ou pasta foi informado."
     )
 
-    print("=" * 65)
-    print(" RESULTADO FINAL")
-    print("=" * 65)
-
     print()
-    print(f"Áudios testados : {processados}")
-    print(f"Acertos         : {acertos}")
-    print(f"Erros           : {erros}")
-    print(f"Taxa de acerto  : {taxa:.2f}%")
+    print(
+        "Exemplo:"
+    )
 
-    # ========================================================
-    # RESULTADO POR PESSOA
-    # ========================================================
-
-    print()
-    print("=" * 65)
-    print(" RESULTADO POR PESSOA")
-    print("=" * 65)
-
-    print()
-
-    for pessoa, dados in estatisticas.items():
-
-        total = dados["total"]
-        acertos_pessoa = dados["acertos"]
-
-        if total == 0:
-            continue
-
-        taxa_pessoa = (
-            acertos_pessoa
-            / total
-            * 100
-        )
-
-        print(
-            f"{pessoa:<12} "
-            f"{acertos_pessoa}/{total} "
-            f"({taxa_pessoa:.2f}%)"
-        )
-
-    # ========================================================
-    # FINAL
-    # ========================================================
-
-    print()
-    print("=" * 65)
-    print(" TESTE FINALIZADO")
-    print("=" * 65)
-    print()
+    print(
+        "python src/05_testar_modelos.py "
+        "--pasta reunioes/reuniao_01/testes"
+    )
 
 
 if __name__ == "__main__":
+
     main()

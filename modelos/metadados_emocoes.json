@@ -2,30 +2,27 @@
     "modelo": "RandomForestClassifier",
     "classes": [
         "alegre",
+        "irritado",
         "neutro",
-        "triste",
-        "irritado"
+        "triste"
     ],
     "sample_rate": 16000,
     "quantidade_amostras": 252,
     "quantidade_treinamento": 189,
     "quantidade_teste": 63,
-    "quantidade_features": 38,
-    "acuracia": 0.5079365079365079,
+    "quantidade_features": 80,
+    "acuracia": 0.5555555555555556,
     "features": [
-        "MFCC_mean_13",
-        "MFCC_std_13",
-        "RMS_mean",
-        "RMS_std",
-        "ZCR_mean",
-        "ZCR_std",
-        "SpectralCentroid_mean",
-        "SpectralCentroid_std",
-        "SpectralBandwidth_mean",
-        "SpectralBandwidth_std",
-        "SpectralRolloff_mean",
-        "SpectralRolloff_std",
-        "Pitch_mean",
-        "Pitch_std"
+        "MFCC_mean_min_max_std_13",
+        "RMS_mean_std_min_max",
+        "ZCR_mean_std_min_max",
+        "SpectralCentroid_mean_std_min_max",
+        "SpectralBandwidth_mean_std_min_max",
+        "SpectralRolloff_mean_std_min_max",
+        "Pitch_mean_std_min_max",
+        "Taxa_de_silencio",
+        "Energia_inicio",
+        "Energia_meio",
+        "Energia_fim"
     ]
 }
